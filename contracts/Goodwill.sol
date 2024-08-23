@@ -7,8 +7,7 @@ contract Goodwill {
         address owner;
         string title;
         string description;
-        uint256 target;
-        uint256 deadline;
+        uint256 target;        
         uint256 amountCollected;
         string image;
         address[] donators;
@@ -23,19 +22,15 @@ contract Goodwill {
         address _owner,
         string memory _title,
         string memory _description,
-        uint256 _target,
-        uint256 _deadline,        
+        uint256 _target,                
         string memory _image
     ) public returns (uint256) {
-        Campaign storage campaign = campaigns[numberOfCampaigns];
-
-        require(campaign.deadline < block.timestamp, "The deadline should be a date in the future");
+        Campaign storage campaign = campaigns[numberOfCampaigns];        
 
         campaign.owner = _owner;
         campaign.title = _title;
         campaign.description = _description;
-        campaign.target = _target;
-        campaign.deadline = _deadline;
+        campaign.target = _target;        
         campaign.amountCollected = 0;
         campaign.image = _image;
 
@@ -46,6 +41,8 @@ contract Goodwill {
 
     function donateToCampaign(uint256 _id) public payable {
         uint256 amount = msg.value;
+
+        require(amount > 0, "Cannot fund with 0 Eth");
 
         Campaign storage campaign = campaigns[_id];        
 
