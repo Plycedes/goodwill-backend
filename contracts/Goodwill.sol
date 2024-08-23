@@ -1,6 +1,7 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.24;
 
+// Author: @plycedes
 contract Goodwill {
     struct Campaign {
         address owner;
@@ -23,8 +24,7 @@ contract Goodwill {
         string memory _title,
         string memory _description,
         uint256 _target,
-        uint256 _deadline,
-        uint256 _amountCollected,
+        uint256 _deadline,        
         string memory _image
     ) public returns (uint256) {
         Campaign storage campaign = campaigns[numberOfCampaigns];
@@ -36,7 +36,7 @@ contract Goodwill {
         campaign.description = _description;
         campaign.target = _target;
         campaign.deadline = _deadline;
-        campaign.amountCollected = _amountCollected;
+        campaign.amountCollected = 0;
         campaign.image = _image;
 
         numberOfCampaigns++;
