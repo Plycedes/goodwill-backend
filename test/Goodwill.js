@@ -76,4 +76,18 @@ describe("Goodwill Contract", () => {
             assert.equal(donation, fundVal);
         });
     });
+
+    describe("getDonators", async () => {
+        it("Returns all donators and donations", async () => {
+            const [caller] = await hre.ethers.getSigners();
+            await goodwill.donateToCampaign(0, { value: fundVal });
+            let allCampaigns = await goodwill.getCampaigns();
+            let campaign = allCampaigns[0];
+
+            const donation = campaign.donations[0];
+            assert.equal(donation, fundVal);
+            const donators = campaign.donators;
+            assert.equal(donators[0], caller.address);
+        });
+    });
 });
